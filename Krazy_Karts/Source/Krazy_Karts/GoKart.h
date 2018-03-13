@@ -30,7 +30,7 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
-	float Velocity;
+	FVector Velocity;
 	
 	void SetForward(float AxisValueIn);
 	
