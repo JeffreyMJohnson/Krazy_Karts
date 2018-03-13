@@ -10,7 +10,6 @@ AGoKart::AGoKart()
 {
 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	ForwardSpeed = 20;
 
 }
 
@@ -25,6 +24,11 @@ void AGoKart::BeginPlay()
 void AGoKart::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	DriveForce = Throttle * MaxDrivingForce * GetActorForwardVector();
+
+	FVector Acceleration = DriveForce / Mass;
+	Velocity += Acceleration * DeltaTime;
 
 	// convert from cm/sec to m/sec
 	FVector Delta = 100  * Velocity * DeltaTime;
@@ -43,6 +47,6 @@ void AGoKart::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AGoKart::SetForward(float AxisValueIn)
 {
-	Velocity = GetActorForwardVector() * AxisValueIn * ForwardSpeed;
+	Throttle = AxisValueIn;
 }
 

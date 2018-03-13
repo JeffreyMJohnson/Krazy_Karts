@@ -16,8 +16,7 @@ public:
 	AGoKart();
 
 protected:
-	UPROPERTY(EditAnywhere)
-	float ForwardSpeed;
+	
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -30,7 +29,18 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
+	// The force applied when throttle held all the way down.
+	UPROPERTY(EditAnywhere)
+	float MaxDrivingForce = 10000;
+
+	// Mass of the car (kg).
+	UPROPERTY(EditAnywhere)
+	float Mass = 1000;
+
+
 	FVector Velocity;
+	FVector DriveForce;
+	float Throttle;
 	
 	void SetForward(float AxisValueIn);
 	
