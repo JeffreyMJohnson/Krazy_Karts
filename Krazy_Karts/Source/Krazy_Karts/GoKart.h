@@ -33,6 +33,10 @@ private:
 	UPROPERTY(EditAnywhere)
 	float MaxDrivingForce = 10000;
 
+	// The number of degrees per second at full steering throw.
+	UPROPERTY(EditAnywhere)
+	float MaxDegreesPerSecond = 90;
+
 	// Mass of the car (kg).
 	UPROPERTY(EditAnywhere)
 	float Mass = 1000;
@@ -41,7 +45,11 @@ private:
 	FVector Velocity;
 	FVector DriveForce;
 	float Throttle;
+	float SteeringThrow;
 	
 	void SetForward(float AxisValueIn);
-	
+	void MoveRight(float AxisValueIn);
+
+	void ApplyRotation(float DeltaTime);
+	void ApplyTranslation(float DeltaTime);
 };
