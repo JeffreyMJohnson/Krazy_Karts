@@ -25,6 +25,10 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	
+
+	
+
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
@@ -32,6 +36,14 @@ private:
 	// The force applied when throttle held all the way down.
 	UPROPERTY(EditAnywhere)
 	float MaxDrivingForce = 10000;
+
+	// Drag of the car.
+	UPROPERTY(EditAnywhere)
+	float DragCoefficient = 100;
+
+	
+	UPROPERTY(EditAnywhere)
+	float RollingResistanceCoefficient = .010f;
 
 	// The number of degrees per second at full steering throw.
 	UPROPERTY(EditAnywhere)
@@ -52,4 +64,7 @@ private:
 
 	void ApplyRotation(float DeltaTime);
 	void ApplyTranslation(float DeltaTime);
+
+	FVector CalculateAirResistence();
+	FVector CalculateRollResistance();
 };

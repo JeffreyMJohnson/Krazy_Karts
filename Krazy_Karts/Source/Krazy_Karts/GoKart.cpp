@@ -3,6 +3,7 @@
 #include "GoKart.h"
 
 #include "Components/InputComponent.h"
+#include "Engine/World.h"
 
 
 // Sets default values
@@ -26,12 +27,30 @@ void AGoKart::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 	DriveForce = Throttle * MaxDrivingForce * GetActorForwardVector();
+	DriveForce += CalculateAirResistence();
+	DriveForce += CalculateRollResistance();
+
 	FVector Acceleration = DriveForce / Mass;
+
 	Velocity += Acceleration * DeltaTime;
+
+	//UE_LOG(LogTemp, Warning, TEXT("Velocity: %s"), *Velocity.ToString());
 
 	ApplyRotation(DeltaTime);
 
 	ApplyTranslation(DeltaTime);
+}
+
+FVector AGoKart::CalculateRollResistance()
+{
+	float AccelerationDueToGravity = Mass * -GetWorld()->GetGravityZ() / 100;
+	return -Velocity.GetSafeNormal() * RollingResistanceCoefficient * AccelerationDueToGravity;
+}
+
+FVector AGoKart::CalculateAirResistence()
+{
+	float Speed = Velocity.Size();
+	return -Velocity.GetSafeNormal() * Velocity.SizeSquared() * DragCoefficient;
 }
 
 void AGoKart::ApplyTranslation(float DeltaTime)
