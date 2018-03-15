@@ -49,6 +49,10 @@ private:
 	UPROPERTY(EditAnywhere)
 	float MaxDegreesPerSecond = 90;
 
+	// The minimum turning radius at full steer.
+	UPROPERTY(EditAnywhere)
+	float MinTurningRadius = 10;
+
 	// Mass of the car (kg).
 	UPROPERTY(EditAnywhere)
 	float Mass = 1000;
