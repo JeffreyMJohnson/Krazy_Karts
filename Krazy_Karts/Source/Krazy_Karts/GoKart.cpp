@@ -34,8 +34,6 @@ void AGoKart::Tick(float DeltaTime)
 
 	Velocity += Acceleration * DeltaTime;
 
-	//UE_LOG(LogTemp, Warning, TEXT("Velocity: %s"), *Velocity.ToString());
-
 	ApplyRotation(DeltaTime);
 
 	ApplyTranslation(DeltaTime);

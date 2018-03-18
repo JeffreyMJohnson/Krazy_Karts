@@ -25,10 +25,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	
-
-	
-
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
@@ -44,10 +40,6 @@ private:
 	
 	UPROPERTY(EditAnywhere)
 	float RollingResistanceCoefficient = .010f;
-
-	// The number of degrees per second at full steering throw.
-	UPROPERTY(EditAnywhere)
-	float MaxDegreesPerSecond = 90;
 
 	// The minimum turning radius at full steer.
 	UPROPERTY(EditAnywhere)
