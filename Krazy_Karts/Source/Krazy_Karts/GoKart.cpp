@@ -14,6 +14,11 @@ AGoKart::AGoKart()
 
 }
 
+FVector AGoKart::GetVelocity() const
+{
+	return Velocity;
+}
+
 // Called when the game starts or when spawned
 void AGoKart::BeginPlay()
 {
@@ -68,7 +73,10 @@ void AGoKart::ApplyRotation(float DeltaTime)
 {
 	float DistanceDelta = FVector::DotProduct(GetActorForwardVector(), Velocity) * DeltaTime;
 	float RotationAngle = (DistanceDelta / MinTurningRadius) * SteeringThrow;
-	FQuat RotationDelta(GetActorUpVector(), RotationAngle);
+	
+	FQuat RotationDelta(GetActorUpVector(), RotationAngle);	
+	CurrentTurnAngle = RotationDelta.Euler().Z;
+
 	Velocity = RotationDelta.RotateVector(Velocity);
 
 	AddActorWorldRotation(RotationDelta);

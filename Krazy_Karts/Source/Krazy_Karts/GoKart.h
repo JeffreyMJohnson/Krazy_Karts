@@ -15,6 +15,10 @@ public:
 	// Sets default values for this pawn's properties
 	AGoKart();
 
+	virtual FVector GetVelocity() const override;
+
+	float GetTurnAngle() { return CurrentTurnAngle; }
+
 protected:
 	
 
@@ -54,6 +58,7 @@ private:
 	FVector DriveForce;
 	float Throttle;
 	float SteeringThrow;
+	float CurrentTurnAngle;
 	
 	void SetForward(float AxisValueIn);
 	void MoveRight(float AxisValueIn);
